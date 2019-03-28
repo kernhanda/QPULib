@@ -136,7 +136,7 @@ template <typename T> class SharedArray {
   SharedArray(uint32_t n) {
     size = handle = 0;
     alloc(n);
-  }  
+  }
 
   uint32_t getAddress() {
     return (uint32_t) gpu_base;
