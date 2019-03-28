@@ -41,6 +41,7 @@ void For_(BoolExpr b);
 void ForBody_();
 void Print(const char *);
 void Print(IntExpr x);
+void Print(FloatExpr x);
 void dmaSetReadPitch(IntExpr n);
 void dmaSetWriteStride(IntExpr n);
 void dmaSetupRead(Dir dir, int numRows, IntExpr vpmAddr,

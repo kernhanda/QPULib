@@ -37,3 +37,6 @@ add_executable(Rot3D ${CMAKE_CURRENT_SOURCE_DIR}/Rot3D.cpp)
 add_executable(Sort ${CMAKE_CURRENT_SOURCE_DIR}/Sort.cpp)
 add_executable(Tri ${CMAKE_CURRENT_SOURCE_DIR}/Tri.cpp)
 add_executable(TriFloat ${CMAKE_CURRENT_SOURCE_DIR}/TriFloat.cpp)
+
+add_executable(Dot ${CMAKE_CURRENT_SOURCE_DIR}/Dot.cpp)
+target_link_libraries(Dot openblas)

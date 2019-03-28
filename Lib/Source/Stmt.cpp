@@ -185,6 +185,15 @@ void Print(IntExpr x)
   stmtStack.replace(mkSeq(stmtStack.top(), s));
 }
 
+void Print(FloatExpr x)
+{
+  Stmt* s = mkStmt();
+  s->tag = PRINT;
+  s->print.tag = PRINT_FLOAT;
+  s->print.expr = x.expr;
+  stmtStack.replace(mkSeq(stmtStack.top(), s));
+}
+
 //=============================================================================
 // VPM Setup
 //=============================================================================
