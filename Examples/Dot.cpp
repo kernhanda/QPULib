@@ -38,7 +38,7 @@ int main()
   // Timestamps
   timeval tvStart, tvEnd, tvDiff;
 
-  const int N = 16 * 10; // 192000
+  const int N = 16 * 100; // 192000
 
   // Construct kernel
   auto k = compile(dot);
@@ -70,14 +70,14 @@ int main()
   printf("BLAS: %ld.%06lds\n", tvDiff.tv_sec, tvDiff.tv_usec);
   printf("blasOutput = %f\n", blasOut);
 
-  printf("\nIndex,A,B,GPU,CPU,Delta\n");
-  for (int i = 0; i < N; ++i) {
-    float a = x[i], b = y[i];
-    float gpu = result[i];
-    float cpu = a * b;
-    float delta = cpu - gpu;
-    printf("%d,%f,%f,%f,%f,%f\n", i, a, b, gpu, cpu, delta);
-  }
+  // printf("\nIndex,A,B,GPU,CPU,Delta\n");
+  // for (int i = 0; i < N; ++i) {
+  //   float a = x[i], b = y[i];
+  //   float gpu = result[i];
+  //   float cpu = a * b;
+  //   float delta = cpu - gpu;
+  //   printf("%d,%f,%f,%f,%f,%f\n", i, a, b, gpu, cpu, delta);
+  // }
 
   return 0;
 }
