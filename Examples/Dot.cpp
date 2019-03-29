@@ -12,11 +12,10 @@ using namespace QPULib;
 
 void dot(Int N, Ptr<Float> A, Ptr<Float> B, Ptr<Float> result)
 {
-    Int inc = 16;//numQPUs() << 4;
+    Int inc = numQPUs() << 4;
     Int qpuID = me();
     Ptr<Float> a = A + index() + (qpuID << 4);
     Ptr<Float> b = B + index() + (qpuID << 4);
-    Ptr<Float> c = result + index() + (qpuID << 4);
     gather(a); gather(b);
 
     Float aOld, bOld;//, temp = 0;
@@ -24,8 +23,7 @@ void dot(Int N, Ptr<Float> A, Ptr<Float> B, Ptr<Float> result)
         gather(a + i + inc);  gather(b + i + inc);
         receive(aOld); receive(bOld);
         // temp = temp + (aOld * bOld);
-        store(aOld * bOld, c + i);
-        // store(aOld * bOld, result + i + (qpuID << 4));
+        store(aOld * bOld, result + i + (qpuID << 4));
     End
 
     // store(temp, result + (qpuID << 4));
@@ -40,13 +38,13 @@ int main()
   // Timestamps
   timeval tvStart, tvEnd, tvDiff;
 
-  const int N = 16 * 12; // 192000
+  const int N = 16 * 10; // 192000
 
   // Construct kernel
   auto k = compile(dot);
 
   // Use 12 QPUs
-  k.setNumQPUs(12);
+  k.setNumQPUs(1);
 
   // Allocate and initialise arrays shared between ARM and GPU
   SharedArray<float> x(N), y(N), result(N);
@@ -58,7 +56,7 @@ int main()
   std::generate_n(&y[0], N, [&] { return dist(engine); });
 
   gettimeofday(&tvStart, NULL);
-  k(N / 12, &x, &y, &result);
+  k(N, &x, &y, &result);
   float gpuOut = std::accumulate(&result[0], &result[0] + N, 0.f);
   gettimeofday(&tvEnd, NULL);
   timersub(&tvEnd, &tvStart, &tvDiff);
