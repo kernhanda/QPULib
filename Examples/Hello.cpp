@@ -6,14 +6,14 @@ using namespace QPULib;
 
 void hello(Ptr<Int> p)
 {
-  *p = numQPUs() << 4;
+  p[me() << 4] =  me();
 }
 
 int main()
 {
   // Construct kernel
   auto k = compile(hello);
-  k.setNumQPUs(1);
+  k.setNumQPUs(12);
   // Allocate and initialise array shared between ARM and GPU
   SharedArray<int> array(16 * k.numQPUs);
   for (int i = 0; i < (16 * k.numQPUs); i++)
