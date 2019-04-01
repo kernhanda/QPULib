@@ -38,5 +38,6 @@ add_executable(Sort ${CMAKE_CURRENT_SOURCE_DIR}/Sort.cpp)
 add_executable(Tri ${CMAKE_CURRENT_SOURCE_DIR}/Tri.cpp)
 add_executable(TriFloat ${CMAKE_CURRENT_SOURCE_DIR}/TriFloat.cpp)
 
+add_executable(Accumulator ${CMAKE_CURRENT_SOURCE_DIR}/Accumulator.cpp)
 add_executable(Dot ${CMAKE_CURRENT_SOURCE_DIR}/Dot.cpp)
 target_link_libraries(Dot openblas)
