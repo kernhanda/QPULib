@@ -22,10 +22,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Lib/qpulib_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/qpulib_config.h)
-include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/Lib
-	${CMAKE_CURRENT_BINARY_DIR}
-)
 
 set(
 	SOURCES
@@ -60,6 +56,8 @@ set(
 
 add_library(qpu.a STATIC ${SOURCES})
 add_library(qpu.so SHARED ${SOURCES})
+target_include_directories(qpu.a PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Lib ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(qpu.so PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Lib ${CMAKE_CURRENT_BINARY_DIR})
 
 set_target_properties(qpu.a PROPERTIES OUTPUT_NAME qpu)
 set_target_properties(qpu.so PROPERTIES OUTPUT_NAME qpu)
