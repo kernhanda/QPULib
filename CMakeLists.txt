@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.1)
 project(QPULib CXX)
 set(CMAKE_CXX_STANDARD 14)
 
-option(BUILD_EXAMPLES "Build all examples in the example directory" OFF)
 option(ENABLE_DEBUG "Output debug information from QPULib" OFF)
 option(ENABLE_QPU "Enable QPU (rpi only), otherwise emulate" OFF)
 
@@ -78,7 +77,3 @@ install(FILES
 	${CMAKE_CURRENT_BINARY_DIR}/qpulib_config.h
 	DESTINATION include
 )
-
-if(${BUILD_EXAMPLES})
-	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Examples)
-endif()
